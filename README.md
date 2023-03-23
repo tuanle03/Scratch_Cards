@@ -4,7 +4,7 @@ This project is focused on building a networked game for scratch cards, where pl
 ## Requirements
 In order to run this project, you will need:
 
-- Ruby on Rails (version 6.1 or higher)
+- Ruby on Rails (version 7.0 or higher)
 - A web server such as Apache or Nginx
 - A database management system such as MySQL or SQLite3
 
