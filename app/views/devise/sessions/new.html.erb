@@ -1,6 +1,21 @@
-<h2>Log in</h2>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lily+Script+One&family=Righteous&display=swap" rel="stylesheet">
+
+<h2 class="title">Scratch Cards</h2>
+  <style>
+body{
+    background-image: url(https://wallpaperaccess.com/download/casino-game-1765662);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+  </style>
+
+
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <div class="container">
   <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
@@ -21,6 +36,9 @@
   <div class="actions">
     <%= f.submit "Log in" %>
   </div>
-<% end %>
 
+<% end %>
 <%= render "devise/shared/links" %>
+</div>
+
+
