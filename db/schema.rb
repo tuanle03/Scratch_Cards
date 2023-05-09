@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_04_163035) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_08_141649) do
+  create_table "rooms", force: :cascade do |t|
+    t.integer "bookmaker_id"
+    t.string "name"
+    t.string "code"
+    t.string "password"
+    t.integer "bets"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false

@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  bookmaker_id: 1
+  name: MyString
+  code: MyString
+  password: MyString
+  bets: 1
+
+two:
+  bookmaker_id: 1
+  name: MyString
+  code: MyString
+  password: MyString
+  bets: 1
