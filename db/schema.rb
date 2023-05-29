@@ -10,13 +10,56 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_08_141649) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_29_175250) do
+  create_table "cards", force: :cascade do |t|
+    t.integer "point"
+    t.string "name"
+    t.string "suit"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "game_player_cards", force: :cascade do |t|
+    t.integer "game_player_id"
+    t.integer "card_id"
+    t.string "option"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "game_players", force: :cascade do |t|
+    t.integer "game_id"
+    t.integer "player_id"
+    t.string "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "games", force: :cascade do |t|
+    t.integer "room_id"
+    t.integer "bookmaker_id"
+    t.integer "current_bets"
+    t.string "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "rooms", force: :cascade do |t|
     t.integer "bookmaker_id"
     t.string "name"
     t.string "code"
     t.string "password"
     t.integer "bets"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "players"
+    t.integer "current_players"
+    t.string "password_digest"
+  end
+
+  create_table "user_rooms", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "room_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -32,6 +75,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_08_141649) do
     t.integer "coins"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "current_room_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

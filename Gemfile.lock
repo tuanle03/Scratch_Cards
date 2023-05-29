@@ -68,11 +68,18 @@ GEM
       tzinfo (~> 2.0)
     addressable (2.8.1)
       public_suffix (>= 2.0.2, < 6.0)
+    autoprefixer-rails (10.4.13.0)
+      execjs (~> 2)
     bcrypt (3.1.18)
     bindex (0.8.1)
     bootsnap (1.16.0)
       msgpack (~> 1.2)
+    bootstrap (5.3.0.alpha3)
+      autoprefixer-rails (>= 9.1.0)
+      popper_js (>= 2.11.7, < 3)
+      sassc-rails (>= 2.0.0)
     builder (3.2.4)
+    byebug (9.1.0)
     capybara (3.38.0)
       addressable
       matrix
@@ -93,9 +100,11 @@ GEM
       responders
       warden (~> 1.2.3)
     erubi (1.12.0)
+    execjs (2.8.1)
     ffi (1.15.5)
     globalid (1.1.0)
       activesupport (>= 5.0)
+    httpclient (2.8.3)
     i18n (1.12.0)
       concurrent-ruby (~> 1.0)
     importmap-rails (1.1.5)
@@ -119,6 +128,7 @@ GEM
     mini_portile2 (2.8.1)
     minitest (5.18.0)
     msgpack (1.6.1)
+    multi_json (1.15.0)
     net-imap (0.3.4)
       date
       net-protocol
@@ -133,9 +143,15 @@ GEM
       mini_portile2 (~> 2.8.0)
       racc (~> 1.4)
     orm_adapter (0.5.0)
+    popper_js (2.11.7)
     public_suffix (5.0.1)
     puma (5.6.5)
       nio4r (~> 2.0)
+    pusher (2.0.3)
+      httpclient (~> 2.8)
+      multi_json (~> 1.15)
+      pusher-signature (~> 0.1.8)
+    pusher-signature (0.1.8)
     racc (1.6.2)
     rack (2.2.6.4)
     rack-test (2.1.0)
@@ -228,13 +244,17 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bcrypt (~> 3.1.7)
   bootsnap
+  bootstrap (= 5.3.0.alpha3)
+  byebug (~> 9.0, >= 9.0.6)
   capybara
   debug
   devise (= 4.9.2)
   importmap-rails
   jbuilder
   puma (~> 5.0)
+  pusher
   rails (~> 7.0.4, >= 7.0.4.3)
   sassc-rails
   selenium-webdriver
