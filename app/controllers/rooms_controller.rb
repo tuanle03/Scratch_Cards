@@ -1,5 +1,7 @@
 class RoomsController < ApplicationController
 
+  before_action :authenticate_user!
+
   skip_before_action :verify_authenticity_token, only: [:submit_game]
 
   def new
@@ -42,8 +44,8 @@ class RoomsController < ApplicationController
     @room = Room.find(params[:id])
 
     if @room.is_public? || session[:authorized_ids].to_a.include?(@room.id)
-      @players = @room.users
       current_user.join_room(@room.id)
+      @players = @room.users.reload
       PusherClient.trigger("room-#{params[:id]}", "room_members_change", {
         html: render_to_string(partial: 'game_players', layout: false),
         players_count: "Players: #{@room.users.count} / #{@room.players}",
@@ -61,7 +63,7 @@ class RoomsController < ApplicationController
       room = current_user.current_room
       current_user.leave_room
 
-      @players = room.users
+      @players = room.users.reload
       PusherClient.trigger("room-#{room.id}", "room_members_change", {
         html: render_to_string(partial: 'game_players', layout: false),
         players_count: "Players: #{room.users.count} / #{room.players}",
