@@ -1,0 +1,64 @@
+ul#current-cards {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 240px;
+  padding: 20px;
+  background: image-url('cards-bg.jpg');
+  margin: 0;
+  box-sizing: border-box;
+
+  li {
+    float: left;
+    margin-right: 10px;
+    cursor: pointer;
+    user-select: none;
+
+    &.toRight {
+      float: right;
+    }
+  }
+}
+
+#submit-game {
+  position: fixed;
+  bottom: 10px;
+  left: calc(50% - 50px);
+  width: 100px;
+}
+
+#countdown {
+  p {
+    font-size: 30px;
+    text-align: center;
+    margin: 0;
+  }
+}
+
+ul.cards {
+  width: 100%;
+
+  li.js-card {
+    float: left;
+    margin: 0 10px;
+    &.toRight {
+      float: right;
+    }
+  }
+}
+
+.game-win {
+  background: image-url('winner.png') no-repeat center center;
+  background-size: 100px;
+}
+
+.game-lose {
+  background: image-url('loser.png') no-repeat center center;
+  background-size: 100px;
+}
+
+.game-draw {
+  background: image-url('draw.png') no-repeat center center;
+  background-size: 100px;
+}

@@ -1,0 +1,101 @@
+<header class="p-3 text-bg-dark">
+  <div class="container">
+    <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+      <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+        <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
+      </a>
+
+      <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+        <li><a href="/" class="nav-link px-2 text-secondary">Home</a></li>
+        <li><a href="#" class="nav-link px-2 text-white">About</a></li>
+      </ul>
+
+      <div class="text-end me-3">
+        <% if @room.iam_bookmaker?(current_user) %>
+          <%= button_to 'New game', ready_room_path(@room), method: :put, class: "btn btn-info" %>
+        <% else %>
+          <%= button_to 'New game', ready_room_path(@room), method: :put, class: "btn btn-info", disabled: true, id: 'ready-button' %>
+        <% end %>
+      </div>
+      <div class="text-end">
+        <%= button_to "Leave Room", leave_room_path(@room), method: :delete, class: "btn btn-warning" %>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class='container mt-4'>
+  <div class='row'>
+    <div class='col'>
+      <div class='card'>
+        <div class='card-body'>
+          <h3>Bookmaker: <%= @game.bookmaker.display_name %></h3>
+          <ul class='list-unstyled cards'>
+            <% @bookmaker_player.game_player_cards.each do |player_card| %>
+              <li class="js-card <%= player_card.option == 'right' ? 'toRight' : nil %>">
+                <%= image_tag player_card.card.image_name, width: 100 %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <h4 class='mt-4'>Players</h4>
+  <div class='row mt-2'>
+    <div class='col'>
+      <% @game.game_players.where.not(player: @game.bookmaker).each do |game_player| %>
+        <div class='card game-<%= game_player.status %>'>
+          <div class='card-body'>
+            <h3><%= game_player.player.display_name %></h3>
+            <ul class='list-unstyled cards'>
+              <% game_player.game_player_cards.each do |player_card| %>
+                <li class="js-card <%= player_card.option == 'right' ? 'toRight' : nil %>">
+                  <%= image_tag player_card.card.image_name, width: 100 %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<script>
+  window.lastGameWaitingAt = new Date("<%= @room.last_game_waiting_at %>");
+
+  window.addEventListener('load', function() {
+    var checker = setInterval(function() {
+      if (window.lastGameWaitingAt == null) {
+        clearInterval(checker);
+        return;
+      }
+
+      var now = new Date();
+      if (now > window.lastGameWaitingAt) {
+        document.getElementById("ready-button").setAttribute("disabled", true);
+        clearInterval(checker);
+      } else {
+        document.getElementById("ready-button").removeAttribute("disabled");
+      }
+    }, 1000);
+  });
+</script>
+
+<script>
+  window.addEventListener("load", function() {
+    var pusher = new Pusher('6a99040438a45cf9bf25', {
+      cluster: 'ap1'
+    });
+
+    var channel = pusher.subscribe("room-<%= @room.id %>");
+    channel.bind('new_game', function(data) {
+      var eventData = JSON.stringify(data);
+      var eventData = JSON.parse(eventData)
+      // Enable Ready button
+      document.getElementById("ready-button").removeAttribute("disabled");
+    });
+  });
+</script>
+

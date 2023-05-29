@@ -1,0 +1,51 @@
+<%= render 'shared/header' %>
+
+<%= form_for(@room, url: rooms_path) do |form| %>
+  <div class="d-flex flex-column flex-md-row p-4 gap-4 py-md-5 align-items-center justify-content-center">
+    <div class="dropdown-menu position-static d-flex flex-column flex-lg-row align-items-stretch justify-content-start p-3 rounded-3 shadow-lg" data-bs-theme="dark">
+      <p class="fs-3 text-white">Create a new room</p>
+      <nav class="col-lg-8">
+        <ul class="list-unstyled d-flex flex-column gap-2">
+          <li>
+            <% if @room.errors.any? %>
+              <div id="error_explanation">
+                <ul class='list-unstyled'>
+                  <% @room.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %>
+            <div>
+              <strong> <%= form.label :name, class: "d-block" %> </strong>
+              <%= form.text_field :name, class: "form-control" %>
+            </div>
+          </li>
+          <li>
+            <div>
+              <strong> <%= form.label :password, class: "d-block" %> </strong>
+              <%= form.text_field :password, class: "form-control" %>
+            </div>
+          </li>
+          <li>
+            <div>
+              <strong> <%= form.label :bets, class: "d-block" %> </strong>
+              <%= form.number_field :bets, class: "form-control" %>
+            </div>
+          </li>
+          <li>
+            <div>
+              <strong> <%= form.label :players, class: "d-block" %> </strong>
+              <%= form.number_field :players, class: "form-control" %>
+            </div>
+          </li>
+          <li>
+            <div>
+              <%= form.submit "Create Room", class: "btn btn-outline-light" %>
+            </div>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+<% end %>

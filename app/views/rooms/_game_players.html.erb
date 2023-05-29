@@ -1,0 +1,7 @@
+<% @players.each do |user| %>
+  <span class="badge d-flex align-items-center p-1 pe-2 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-pill position-relative me-3">
+    <img class="rounded-circle me-1" width="24" height="24" src="<%= user.gavatar %>" alt="">
+    <%= user.display_name %>
+    <span class='position-absolute top-0 start-100 translate-middle p-1 bg-light border border-light rounded-circle text-warning'><%= user.coins.to_i %></span>
+  </span>
+<% end %>
