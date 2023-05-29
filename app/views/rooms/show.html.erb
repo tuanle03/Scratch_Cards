@@ -1,12 +1,4 @@
 <% if user_signed_in? %>
-  <style>
-    body{
-      background-image: url("");
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-      background-size: cover;
-    }
-  </style>
   <header class="p-3 text-bg-dark">
     <div class="container">
       <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
@@ -19,6 +11,9 @@
           <li><a href="#" class="nav-link px-2 text-white">About</a></li>
         </ul>
 
+        <div class="text-end me-3">
+          <%= current_user.display_name %>
+        </div>
         <div class="text-end">
           <%= button_to "Leave Room", leave_room_path(@room), method: :delete, class: "btn btn-warning" %>
         </div>
@@ -44,48 +39,80 @@
             </li>
             <li>
               <div>
-                <strong> <%= label_tag :code, "Players: #{@room.current_players_count} / #{@room.players}" , class: "d-block" %> </strong>
+                <strong> <%= label_tag :code, "Players: #{@room.current_players_count} / #{@room.players}" , id: 'players-count', class: "d-block" %> </strong>
               </div>
             </li>
-          </ul>
-        </nav>
-      </div>
-      <div class="mt-2 dropdown-menu position-static d-flex flex-column flex-lg-row align-items-stretch justify-content-start p-3 rounded-3 shadow-lg" data-bs-theme="white">
-        <nav class="col-lg-12">
-          <ul class="list-unstyled d-flex flex-column gap-2 text-center">
-            <% @room.users.each do |user| %>
-              <div class="hstack gap-3 mb-2 d-flex">
-                <div class="avatar p-2 flex-fill">
-                  <%= image_tag user.gavatar, size: "30x30", class: "avatar-img rounded-circle" %>
-                </div>
-                <div class="overflow-hidden  p-2 flex-fill">
-                  <p class="h6 mb-0 p-2 w-100"> <%= user.display_name %> </p>
-                </div>
-
-                <div class="overflow-hidden p-2 flex-fill">
-                  <p class="mb-0 small text-truncate p-2 flex-shrink-1"> <%= user.coins.to_i %> </p>
-                </div>
-              </div>
-            <% end %>
           </ul>
         </nav>
       </div>
     </div>
 
     <div class="col-8">
-      <div class="d-flex gap-2 justify-content-center py-5">
-
+      <div class="d-flex gap-2 justify-content-center py-5" id='room-users'>
         <% @room.users.each do |user| %>
-          <span class="badge d-flex align-items-center p-1 pe-2 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-pill">
-            <img class="rounded-circle me-1" width="24" height="24" src="<%= user.gavatar %>" alt=""> <%= user.display_name %>
+          <span class="badge d-flex align-items-center p-1 pe-2 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-pill position-relative me-3">
+            <img class="rounded-circle me-1" width="24" height="24" src="<%= user.gavatar %>" alt="">
+            <%= user.display_name %>
+            <span class='position-absolute top-0 start-100 translate-middle p-1 bg-light border border-light rounded-circle text-warning'><%= user.coins.to_i %></span>
           </span>
         <% end %>
 
       </div>
 
       <div id='current-player'>
-        <%= button_to 'Ready', ready_room_path(@room), method: :put, class: "btn btn-success d-grid gap-2 col-2 mx-auto" %>
+        <% if @room.iam_bookmaker?(current_user) %>
+          <%= button_to 'Ready', ready_room_path(@room), method: :put, class: "btn btn-success d-grid gap-2 col-2 mx-auto" %>
+        <% else %>
+          <%= button_to 'Ready', ready_room_path(@room), method: :put, class: "btn btn-success d-grid gap-2 col-2 mx-auto", disabled: true, id: 'ready-button' %>
+        <% end %>
       </div>
     </div>
   </div>
 <% end %>
+
+<script>
+  window.lastGameWaitingAt = new Date("<%= @room.last_game_waiting_at %>");
+
+  window.addEventListener('load', function() {
+    var checker = setInterval(function() {
+      if (window.lastGameWaitingAt == null || "<%= @room.last_game_waiting_at %>" == '') {
+        $('#ready-button').attr('disabled', true);
+        clearInterval(checker);
+        return;
+      }
+
+      var now = new Date();
+      if (now > window.lastGameWaitingAt) {
+        $('#ready-button').attr('disabled', true);
+        clearInterval(checker);
+      } else {
+        $('#ready-button').removeAttr('disabled');
+      }
+    }, 1000);
+  });
+</script>
+
+<script>
+  window.addEventListener("load", function() {
+    var pusher = new Pusher('6a99040438a45cf9bf25', {
+      cluster: 'ap1'
+    });
+
+    var channel = pusher.subscribe("room-<%= @room.id %>");
+    channel.bind('new_game', function(data) {
+      var eventData = JSON.stringify(data);
+      var eventData = JSON.parse(eventData)
+      // Enable Ready button
+      $('#ready-button').removeAttr('disabled');
+    });
+
+    channel.bind('room_members_change', function(data) {
+      var eventData = JSON.stringify(data);
+      var eventData = JSON.parse(eventData)
+      // Render current players
+      $('#room-users').html(eventData.html);
+      $('#players-count').html(eventData.players_count);
+    });
+  });
+</script>
+

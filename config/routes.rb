@@ -10,8 +10,9 @@ Rails.application.routes.draw do
       put :unready
       post :join
       get 'game/:game_id', action: :game, as: :game
-      get 'game/:game_id/players', action: :game_players, as: :players
-
+      get 'game/:game_id/cards', action: :cards, as: :cards_game
+      post 'game/:game_id/submit', action: :submit_game, as: :submit_game
+      get 'game/:game_id/result', action: :result, as: :result_game
     end
     collection do
       post :join_private

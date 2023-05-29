@@ -3,12 +3,14 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  has_many  :user_rooms
-  has_many  :rooms, through: :user_rooms
+
+  belongs_to :current_room, class_name: 'Room', optional: true
 
   attribute :ready, :boolean, default: false
 
   scope :top_coins, -> { order(coins: :desc).limit(10) }
+
+  before_validation :init_coins, on: :create
 
   def gavatar
     md5 = Digest::MD5.hexdigest(self.email)
@@ -25,6 +27,12 @@ class User < ApplicationRecord
 
   def leave_room
     self.update(current_room_id: nil)
+  end
+
+  private
+
+  def init_coins
+    self.coins = 1_000
   end
 
 end

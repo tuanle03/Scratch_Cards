@@ -36,3 +36,8 @@
     margin-top: 30px;
     text-shadow: rgb(247, 225, 56) 10px 5px 10px;
 }
+
+[disabled=disabled] {
+  cursor: not-allowed;
+  opacity: 0.6;
+}

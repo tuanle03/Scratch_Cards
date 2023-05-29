@@ -1,11 +1,3 @@
-<style>
-body {
-  background-image: url("");
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: cover;
-}
-</style>
 <header class="p-3 text-bg-dark">
   <div class="container">
     <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
@@ -44,45 +36,155 @@ body {
             </li>
             <li>
               <div>
-                <strong> <%= label_tag :code, "Players: #{@game.players.count} / #{@room.players}" , class: "d-block" %> </strong>
+                <strong> <%= label_tag :code, "Max players: #{@room.players}" , class: "d-block" %> </strong>
               </div>
             </li>
           </ul>
         </nav>
       </div>
+
+      <div class='card shadow-lg mt-4'>
+        <div class='card-body'>
+          <div id='countdown'>
+            <p id='waiting-countdown'></p>
+            <p id='playing-countdown'></p>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div class="col">
+    <div class="col-9">
       <div class="d-flex gap-2 justify-content-center py-5" id='current-players'>
         <% @game.players.each do |user| %>
-          <span class="badge d-flex align-items-center p-1 pe-2 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-pill">
-            <img class="rounded-circle me-1" width="24" height="24" src="<%= user.gavatar %>" alt=""> <%= user.display_name %>
-          <p class="mb-0 small text-truncate p-2 flex-shrink-1 text-warning"> <%= user.coins.to_i %> </p>
+          <span class="badge d-flex align-items-center p-1 pe-2 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-pill position-relative me-3">
+            <img class="rounded-circle me-1" width="24" height="24" src="<%= user.gavatar %>" alt="">
+            <%= user.display_name %>
+            <span class='position-absolute top-0 start-100 translate-middle p-1 bg-light border border-light rounded-circle text-warning'><%= user.coins.to_i %></span>
           </span>
         <% end %>
-
       </div>
 
       <div id='current-player'>
         <%= button_to 'Un-Ready', unready_room_path(@room), method: :put, class: "btn btn-warning d-grid gap-2 col-2 mx-auto" %>
       </div>
 
-      <ul class='list-unstyled' id='current-cards'>
-        <% @game_player.cards.each do |card| %>
-          <li class='js-card'>
-            <%= image_tag card.image_name, class: "img-thumbnail", width: 100 %>
-          </li>
-        <% end %>
-      </ul>
+      <ul class='list-unstyled' id='current-cards' style='display: none'></ul>
+
+      <%= link_to 'Submit', '#', class: "btn btn-info d-grid gap-2 col-2 mx-auto", id: 'submit-game', disabled: true %>
     </div>
   </div>
 </div>
 
 <script>
+  function disableChangeCards() {
+    $('#current-cards').off('click', '.js-card');
+    $('#submit-game').attr('disabled', 'true');
+  }
+
   window.addEventListener("load", function() {
     $('#current-cards').on('click', '.js-card', function() {
-      $(this).toggleClass('selected');
-    })
+      $(this).toggleClass('toRight');
+      var rightCards = $("#current-cards li.js-card.toRight");
+      if (rightCards.length === 3) {
+        $('#submit-game').removeAttr('disabled');
+      } else {
+        $('#submit-game').attr('disabled', 'true');
+      }
+    });
+
+    $(document).on('click', '#submit-game', function() {
+      var cards = $("#current-cards li.js-card");
+      var rightIDs = [];
+      var leftIDs = [];
+
+      cards.each(function() {
+        this.classList.contains('toRight') ? rightIDs.push($(this).data('card-id')) : leftIDs.push($(this).data('card-id'));
+      });
+
+      $.ajax( {
+        url: "<%= submit_game_room_path(@room, @game) %>",
+        type: "POST",
+        data: { right_ids: rightIDs, left_ids: leftIDs }
+      }).done(function(data) {
+        disableChangeCards();
+      });
+
+      return false;
+    });
+  });
+</script>
+
+<script>
+  function isWaiting() {
+    var endOfWaiting = new Date("<%= @game.end_of_waiting_at %>");
+    return endOfWaiting > (new Date());
+  }
+
+  function isPlaying() {
+    var endOfPlaying = new Date("<%= @game.end_of_playing_at %>");
+    return endOfPlaying > (new Date());
+  }
+
+  function isFinished() {
+    var endOfPlaying = new Date("<%= @game.end_of_playing_at %>");
+    return endOfPlaying < (new Date());
+  }
+
+  function showWaitingCountdown() {
+    var countDownDate = new Date("<%= @game.end_of_waiting_at %>").getTime();
+    var now = new Date().getTime();
+    var distance = countDownDate - now;
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    $('#waiting-countdown').text(seconds);
+  }
+
+  function hideWaitingCountdown() {
+    $('#waiting-countdown').hide();
+  }
+
+  function hidePlayingCountdown() {
+    $('#playing-countdown').hide();
+  }
+
+  function showPlayingCountdown() {
+    var countDownDate = new Date("<%= @game.end_of_playing_at %>").getTime();
+    var now = new Date().getTime();
+    var distance = countDownDate - now;
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    $('#playing-countdown').text(seconds);
+  }
+
+  function showCards() {
+    if (window.isShowedCards) return;
+
+    window.isShowedCards = true;
+
+    $.ajax( {
+      url: "<%= cards_game_room_path(@room, @game) %>",
+      type: "GET"
+    }).done(function(data) {
+      $('#current-cards').html(data).show();
+    });
+  }
+
+  function showResult() {
+    window.location.href = "<%= result_game_room_path(@room, @game) %>";
+  }
+
+  window.addEventListener("load", function() {
+    setInterval(function() {
+      if (isWaiting()) {
+        showWaitingCountdown();
+      } else if (isPlaying()) {
+        hideWaitingCountdown();
+        showPlayingCountdown();
+        showCards();
+      } else if (isFinished()) {
+        showResult();
+        clearInterval(this);
+        return;
+      }
+    }, 1000);
   });
 </script>
 
@@ -93,18 +195,10 @@ body {
     });
 
     var channel = pusher.subscribe("room-<%= @room.id %>");
-    channel.bind('update', function(data) {
+    channel.bind('new-player', function(data) {
       var eventData = JSON.stringify(data);
-      var eventData = JSON.parse(eventData)
-      if (eventData.message == 'new player') {
-        $.ajax( {
-          url: "<%= players_room_path(@room.id, @game.id) %>",
-          type: "GET",
-        }).done(function(data) {
-          $('#current-players').html(data);
-        });
-      }
-
+      var eventData = JSON.parse(eventData);
+      $('#current-players').html(eventData.html);
     });
   });
 </script>

@@ -1,0 +1,5 @@
+<% @game_player.cards.each do |card| %>
+  <li class='js-card' data-card-id="<%= card.id %>">
+    <%= image_tag card.image_name, width: 100 %>
+  </li>
+<% end %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_27_183441) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_29_175250) do
   create_table "cards", force: :cascade do |t|
     t.integer "point"
     t.string "name"
@@ -54,6 +54,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_27_183441) do
     t.datetime "updated_at", null: false
     t.integer "players"
     t.integer "current_players"
+    t.string "password_digest"
   end
 
   create_table "user_rooms", force: :cascade do |t|
