@@ -26,7 +26,7 @@ class User < ApplicationRecord
   end
 
   def leave_room
-    self.update(current_room_id: nil)
+    self.update!(current_room_id: nil)
   end
 
   private
