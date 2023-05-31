@@ -18,14 +18,32 @@
 
 .field{
 
-    color: black;
+    color: #7E1717;
     font-size: 20px;
     font-family: 'Lily Script One', cursive;
 }
 
+.field,
+.card-body h1,
+.text-danger,
+.form-floating label,
+.form-floating input,
+.checkbox label,
+.btn,
+.form-control,
+.btn-primary {
+  color: #7E1717;
+  font-family: 'Lily Script One', cursive;
+}
+
+.sign-button {
+    color: #7E1717;
+    font-family: 'Lily Script One', cursive;
+  }
 /* .actions{
     padding-left: 45%;
 } */
+
 
  .title {
     font-size: 200px;
@@ -35,9 +53,105 @@
     font-family: 'Lily Script One', cursive;
     margin-top: 30px;
     text-shadow: rgb(247, 225, 56) 10px 5px 10px;
+    animation: glowing 2s infinite;
 }
+  
+@keyframes glowing {
+    0% {
+      text-shadow: 0 0 5px rgb(247, 225, 56);
+    }
+    50% {
+      text-shadow: 0 0 20px rgb(247, 225, 56);
+    }
+    100% {
+      text-shadow: 0 0 5px rgb(247, 225, 56);
+    }
+  }
 
 [disabled=disabled] {
   cursor: not-allowed;
   opacity: 0.6;
 }
+
+.btn-primary {
+    font-family: 'Lily Script One', cursive;
+    background-color: #7E1717;
+    color: #ffffff;
+    font-size: 25px;
+    text-align: center;
+    display: block; /* Chuyển nút thành phần tử block */
+    margin: 0 auto; /* Căn giữa theo chiều ngang */
+    animation: glowingButton 2s infinite;
+  }
+  
+  .w-100 {
+    font-family: 'Lily Script One', cursive; /* Đổi font */
+    color: #7E1717; /* Đổi màu chữ */
+  }
+
+  .fade-in {
+    animation: fadeInAnimation 1s ease-in;
+    animation-fill-mode: forwards;
+    opacity: 0;
+  }
+  
+  @keyframes fadeInAnimation {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+ 
+@keyframes glowingButton {
+    0% {
+      box-shadow: 0 0 5px rgba(126, 23, 23, 0.5);
+    }
+    50% {
+      box-shadow: 0 0 20px rgba(126, 23, 23, 0.8);
+    }
+    100% {
+      box-shadow: 0 0 5px rgba(126, 23, 23, 0.5);
+    }
+  }
+
+  .form-control:focus {
+    border-color: #eb1818;
+    box-shadow: 0 0 5px rgba(235, 24, 24, 0.5);
+  }
+  
+  .form-control:hover {
+    background-color: rgba(126, 23, 23, 0.1);
+  }
+  
+  .card {
+    position: relative;
+    z-index: 0;
+    overflow: hidden;
+    border-radius: 50%; /* Make the card shape elliptical */
+  }
+  
+  .card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url("background.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    filter: blur(0.5px); /* Adjust the blur radius as needed */
+    opacity: 0.6; /* Adjust the opacity as needed */
+    z-index: -1;
+  }
+  
+  .card-body {
+    position: relative;
+    z-index: 1; /* Set a higher z-index to keep it above the background */
+  }
+  
+  
+  
