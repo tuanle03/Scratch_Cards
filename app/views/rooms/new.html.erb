@@ -1,9 +1,10 @@
-<%= render 'shared/header' %>
 
+<link href="https://fonts.googleapis.com/css2?family=Lily+Script+One&family=Righteous&display=swap" rel="stylesheet">
+<%= render 'shared/header' %>
 <%= form_for(@room, url: rooms_path) do |form| %>
   <div class="d-flex flex-column flex-md-row p-4 gap-4 py-md-5 align-items-center justify-content-center">
-    <div class="dropdown-menu position-static d-flex flex-column flex-lg-row align-items-stretch justify-content-start p-3 rounded-3 shadow-lg" data-bs-theme="dark">
-      <p class="fs-3 text-white">Create a new room</p>
+    <div class="dropdown-menu position-static d-flex flex-column flex-lg-row align-items-stretch justify-content-start p-3 rounded-3 shadow-lg" data-bs-theme="light">
+      <p class="text">Create a new room</p>
       <nav class="col-lg-8">
         <ul class="list-unstyled d-flex flex-column gap-2">
           <li>
@@ -41,7 +42,7 @@
           </li>
           <li>
             <div>
-              <%= form.submit "Create Room", class: "btn btn-outline-light" %>
+              <%= form.submit "Create Room", class: "btn btn-outline-dark" %>
             </div>
           </li>
         </ul>
@@ -49,3 +50,4 @@
     </div>
   </div>
 <% end %>
+

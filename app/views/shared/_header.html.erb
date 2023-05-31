@@ -1,34 +1,74 @@
-<header class="p-3 text-bg-dark">
-  <div class="container">
-    <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-      <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
-        <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
-      </a>
-
-      <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-        <li><a href="/" class="nav-link px-2 text-secondary">Home</a></li>
-        <li><a href="#" class="nav-link px-2 text-white">About</a></li>
-      </ul>
-
-      <div class="text-end">
-        <%= button_to "Create Room", new_room_path, method: :get, class: "btn btn-outline-light me-2" %>
-      </div>
-      <div class="text-end">
-      </div>
-      <div class="dropdown text-end">
-        <a class="d-block link-light text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-          <%= image_tag current_user.gavatar, size: "32x32", class: "rounded-circle" %>
+<link href="https://fonts.googleapis.com/css2?family=Lily+Script+One&family=Righteous&display=swap" rel="stylesheet">
+<header class="p-3">
+    <div class="container">
+      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+          <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
         </a>
-        <ul class="dropdown-menu text-small" style="">
-          <a class="dropdown-item"><%= current_user.email %></a>
-          <li><a class="dropdown-item" href="#">Transactions</a></li>
-          <li><a class="dropdown-item" href="#">Profile</a></li>
-          <li><hr class="dropdown-divider"></li>
-          <li>
-            <%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
-          </li>
+
+        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+          <li><a href="/" class="nav-link px-2 text-white fw-bold">Home</a></li>
+          <li><a href="#" class="nav-link px-2 text-white fw-bold" id="about-link">About</a></li>
         </ul>
+
+        <div class="text-end">
+          <%= button_to "Create Room", new_room_path, method: :get, class: "btn btn-outline-light me-2" %>
+        </div>
+
+        <div class="dropdown text-end">
+          <a class="d-block link-light text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            <%= image_tag current_user.gavatar, size: "32x32", class: "rounded-circle" %>
+          </a>
+          <ul class="dropdown-menu text-small" style="">
+            <li><a class="dropdown-item"><%= current_user.email %></a></li>
+            <li><a class="dropdown-item" href="#">Transactions</a></li>
+            <li><a class="dropdown-item" href="#">Profile</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li>
+              <%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
+  </header>
+
+  <div id="popup" class="popup">
+    <div class="popup-content">
+      <p>
+      Rules: 
+
+      Each person will be dealt 6 cards.
+
+      Players arrange their cards into two piles (each pile 3 cards) in order to maximize the sum of the remainders when dividing the sum of any three cards by 10. 
+      
+      Then press submit within 30 seconds, otherwise, it will be considered as giving up.
+      
+      Then, compare the piles with the host according to the rule: max against max, min against min.
+      
+      If you win both comparisons, you receive coins. If it's a tie, you keep your coins. If you lose, you lose your betting money.
+      </p>
+      <button class="popup-close">Close</button>
+    </div>
   </div>
-</header>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var aboutLink = document.getElementById('about-link');
+      var popup = document.getElementById('popup');
+      var popupClose = document.querySelector('.popup-close');
+
+      // Show popup when About link is clicked
+      aboutLink.addEventListener('click', function(event) {
+        event.preventDefault();
+        popup.style.display = 'block';
+      });
+
+      // Hide popup when close button is clicked
+      popupClose.addEventListener('click', function() {
+        popup.style.display = 'none';
+      });
+    });
+  </script>
+
+

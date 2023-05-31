@@ -14,7 +14,43 @@
  *= require_self
  */
 
+ .btn-outline-dark{
+  font-family: 'Lily Script One', cursive;
+  color: #7E1717;
+ }
 
+ .fs-3{
+  color: #7E1717;
+ }
+
+ .p-3 {
+  background-color: #7E1717;
+}
+
+ header, 
+ body, 
+ a, 
+ ul, 
+ li, 
+ div.dropdown, 
+ .dropdown-item {
+  font-family: 'Lily Script One', cursive;
+  color: #7E1717;
+}
+
+
+.form-join-room {
+  font-family: 'Lily Script One', cursive;
+  color: #7E1717;
+}
+
+.form-join-room .fs-3.text-dark {
+  color: #7E1717;
+}
+
+.card-title{
+  font-family: 'Lily Script One', cursive;
+}
 
 .field{
 
@@ -30,6 +66,7 @@
 .form-floating input,
 .checkbox label,
 .btn,
+
 .form-control,
 .btn-primary {
   color: #7E1717;
@@ -40,10 +77,6 @@
     color: #7E1717;
     font-family: 'Lily Script One', cursive;
   }
-/* .actions{
-    padding-left: 45%;
-} */
-
 
  .title {
     font-size: 200px;
@@ -129,7 +162,7 @@
     position: relative;
     z-index: 0;
     overflow: hidden;
-    border-radius: 50%; /* Make the card shape elliptical */
+    border-radius: 50%; 
   }
   
   .card::before {
@@ -143,15 +176,118 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    filter: blur(0.5px); /* Adjust the blur radius as needed */
-    opacity: 0.6; /* Adjust the opacity as needed */
+    filter: blur(0.5px); 
+    opacity: 0.6; 
     z-index: -1;
   }
-  
-  .card-body {
-    position: relative;
-    z-index: 1; /* Set a higher z-index to keep it above the background */
+
+  @font-face {
+    font-family: 'Lily Script One';
+    src: url('Scratch_Cards/app/assets/stylesheets/LilyScriptOne-Regular.ttf') format('truetype');
+  }
+  body {
+    font-family: 'Lily Script One', cursive;
+  }
+  .btn-outline-dark {
+    font-family: 'Lily Script One', cursive;
+    background-color: #7E1717;
+    color: #ffffff;
+    font-size: 15px;
+    text-align: center;
+    display: block;
+    margin: 0 auto;
+    margin-left: -1px; /* Điều chỉnh giá trị margin-left ở đây */
+    animation: glowingButton 2s infinite;
+  }
+  .nav-link {
+    color: #fff;
   }
   
+  .nav-link.fw-bold {
+    font-weight: bold;
+  }
   
-  
+  .popup {
+    color: #7E1717;
+    font-family: 'Lily Script One', cursive;
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+  }
+
+  .popup-content {
+    color: #7E1717;
+    font-family: 'Lily Script One', cursive;
+    background-color: #fff;
+    max-width: 400px;
+    margin: 100px auto;
+    padding: 20px;
+    border-radius: 5px;
+  }
+
+  .popup-close {
+    font-family: 'Lily Script One', cursive;
+    background-color: #7E1717;
+    color: #ffffff;
+    font-size: 15px;
+    text-align: center;
+    display: block;
+    margin: 0 auto;
+    margin-left: -1px; /* Điều chỉnh giá trị margin-left ở đây */
+    animation: glowingButton 2s infinite;
+  }
+
+.card-mt-3{
+  margin-top: 10px; 
+  padding: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.1); 
+  background-color: white; 
+  flex-wrap: wrap;
+  font-family: 'Lily Script One', cursive;
+}
+
+.rounded-circle-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10px; /* Điều chỉnh khoảng cách giữa button và hình ảnh */
+}
+
+.btn-outline-light {
+  margin-bottom: 0; /* Loại bỏ khoảng cách dưới button */
+}
+.btn btn-outline-light me-2{
+  margin-bottom: 0;
+}
+.dropdown-toggle {
+  display: flex;
+  align-items: center;
+}
+
+.text-end {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.btn-outline-light {
+  margin-top: 10px; /* Điều chỉnh khoảng cách giữa button và các phần tử trên */
+}
+
+.text{
+  color: #7E1717;
+  font-family: 'Lily Script One', cursive;
+  font-size: 25px
+}
+
+body {
+  background-image: url("giphy.gif");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center top 80%;
+}
