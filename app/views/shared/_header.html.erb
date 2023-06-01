@@ -17,7 +17,7 @@
 
         <div class="dropdown text-end">
           <a class="d-block link-light text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-            <%= image_tag current_user.gavatar, size: "32x32", class: "rounded-circle" %>
+            <%= image_tag current_user.gavatar, size: "36x36", class: "rounded-circle" %>
           </a>
           <ul class="dropdown-menu text-small" style="">
             <li><a class="dropdown-item"><%= current_user.email %></a></li>
@@ -38,13 +38,13 @@
       <p>
       Rules: 
 
-      Each person will be dealt 6 cards.
+      Each person will be dealt 6 cards. <br>
 
       Players arrange their cards into two piles (each pile 3 cards) in order to maximize the sum of the remainders when dividing the sum of any three cards by 10. 
       
-      Then press submit within 30 seconds, otherwise, it will be considered as giving up.
+      Then press submit within 30 seconds, otherwise, it will be considered as giving up. <br>
       
-      Then, compare the piles with the host according to the rule: max against max, min against min.
+      Compare the piles with the host according to the rule: max against max, min against min. <br>
       
       If you win both comparisons, you receive coins. If it's a tie, you keep your coins. If you lose, you lose your betting money.
       </p>
