@@ -14,10 +14,9 @@
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="container">
-    <div class="row">
       <div class="col-4 offset-4">
         <div class="card">
-          <div class="card-body">
+          <div class="card-body fade-in">
             <h1 class="h3 mb-3 fw-normal text-center fs-2">Please sign in</h1>
 
             <%= render "devise/shared/error_messages", resource: resource %>
@@ -26,7 +25,6 @@
                 <%= flash[:alert] %>
               </div>
             <% end %>
-
 
             <div class="form-floating">
               <%= f.email_field :email, class: 'form-control', placeholder: 'your-name@gmail.com' %>
@@ -46,12 +44,13 @@
                 </label>
               </div>
             <% end %>
-            <%= f.submit "Sign in", class: "w-100 btn btn-lg btn-primary" %>
-            <%= render "devise/shared/links" %>
+            <%= f.submit "Sign in", class: "btn-primary" %>
+            <%= render "devise/shared/links"%>
           </div>
         </div>
       </div>
-    </div>
   </div>
 <% end %>
+
+
 

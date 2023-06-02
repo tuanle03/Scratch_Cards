@@ -1,10 +1,11 @@
+<link href="https://fonts.googleapis.com/css2?family=Lily+Script+One&family=Righteous&display=swap" rel="stylesheet">
 <div class='text-center mt-2'>
   <%- if controller_name != 'sessions' %>
-    <%= link_to "Sign in", new_session_path(resource_name), class: "w-100 link-offset-2 link-underline link-underline-opacity-0" %><br />
+    <%= link_to "Sign in", new_session_path(resource_name), class: "w-100" %><br />
   <% end %>
 
   <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-    <%= link_to "Sign up", new_registration_path(resource_name), class: "w-100 link-offset-2 link-underline link-underline-opacity-0" %><br />
+    <%= link_to "Sign up", new_registration_path(resource_name), class: "w-100" %><br />
   <% end %>
 
   <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
