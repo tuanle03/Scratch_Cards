@@ -1,3 +1,4 @@
+<link href="https://fonts.googleapis.com/css2?family=Lily+Script+One&family=Righteous&display=swap" rel="stylesheet">
 <div class="card mt-3">
   <div class="card-header pb-0 border-0">
     <h5 class="card-title mb-0">Ranking</h5>
@@ -6,14 +7,14 @@
 
     <% @top_players.each do |player| %>
       <div class="hstack gap-3 mb-2 d-flex">
-        <div class="avatar p-2 flex-fill">
+        <div class="avatar p-2">
           <%= image_tag player.gavatar, size: "48x48", class: "avatar-img rounded-circle" %>
         </div>
         <div class="overflow-hidden  p-2 flex-fill">
           <p class="h6 mb-0 p-2 w-100"> <%= player.display_name %> </p>
         </div>
 
-        <div class="overflow-hidden p-2 flex-fill">
+        <div class="overflow-hidden p-2">
           <p class="mb-0 small text-truncate p-2 flex-shrink-1"> <%= player.coins.to_i %> </p>
         </div>
       </div>

@@ -1,6 +1,6 @@
 class Game < ApplicationRecord
 
-  WAITING_TIME = 30.seconds
+  WAITING_TIME = 20.seconds
   PLAY_TIME = 30.seconds
 
   has_many :game_players
