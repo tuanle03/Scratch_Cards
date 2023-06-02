@@ -10,14 +10,18 @@
         <li><a href="#" class="nav-link px-2 text-white fw-bold" id="about-link">About</a></li>
       </ul>
 
-      <div class="text-end me-3">
+      <div class="nav-link px-2 text-white fw-bold me-3">
+        <%= current_user.display_name %>
+      </div>
+
+      <div class="text-end me-3 mt-2">
         <% if @room.iam_bookmaker?(current_user) %>
           <%= button_to 'New game', ready_room_path(@room), method: :put, class: "btn btn-info" %>
         <% else %>
           <%= button_to 'New game', ready_room_path(@room), method: :put, class: "btn btn-info", disabled: true, id: 'ready-button' %>
         <% end %>
       </div>
-      <div class="text-end">
+      <div class="text-end mt-2">
         <%= button_to "Leave Room", leave_room_path(@room), method: :delete, class: "btn btn-warning" %>
       </div>
     </div>
@@ -62,6 +66,25 @@
   </div>
 </div>
 
+<div id="popup" class="popup">
+  <div class="popup-content">
+    <p>
+    Rules:
+
+    Each person will be dealt 6 cards. <br>
+
+    Players arrange their cards into two piles (each pile 3 cards) in order to maximize the sum of the remainders when dividing the sum of any three cards by 10.
+
+    Then press submit within 30 seconds, otherwise, it will be considered as giving up. <br>
+
+    Compare the piles with the host according to the rule: max against max, min against min. <br>
+
+    If you win both comparisons, you receive coins. If it's a tie, you keep your coins. If you lose, you lose your betting money.
+    </p>
+    <button class="popup-close">Close</button>
+  </div>
+</div>
+
 <script>
   window.lastGameWaitingAt = new Date("<%= @room.last_game_waiting_at %>");
 
@@ -99,3 +122,21 @@
   });
 </script>
 
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var aboutLink = document.getElementById('about-link');
+    var popup = document.getElementById('popup');
+    var popupClose = document.querySelector('.popup-close');
+
+    // Show popup when About link is clicked
+    aboutLink.addEventListener('click', function(event) {
+      event.preventDefault();
+      popup.style.display = 'block';
+    });
+
+    // Hide popup when close button is clicked
+    popupClose.addEventListener('click', function() {
+      popup.style.display = 'none';
+    });
+  });
+</script>

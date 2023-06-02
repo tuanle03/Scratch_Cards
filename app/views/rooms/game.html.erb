@@ -10,8 +10,12 @@
         <li><a href="#" class="nav-link px-2 text-white fw-bold" id="about-link">About</a></li>
       </ul>
 
+      <div class="nav-link px-2 text-white fw-bold me-3">
+        <%= current_user.display_name %>
+      </div>
+
       <div class="text-end">
-        <%= button_to "Leave Room", leave_room_path(@room), method: :delete, class: "btn btn-warning" %>
+        <%= button_to "Leave Room", leave_room_path(@room), method: :delete, class: "btn btn-warning mt-2" %>
       </div>
     </div>
   </div>
@@ -78,16 +82,16 @@
  <div id="popup" class="popup">
     <div class="popup-content">
       <p>
-      Rules: 
+      Rules:
 
       Each person will be dealt 6 cards. <br>
 
-      Players arrange their cards into two piles (each pile 3 cards) in order to maximize the sum of the remainders when dividing the sum of any three cards by 10. 
-      
+      Players arrange their cards into two piles (each pile 3 cards) in order to maximize the sum of the remainders when dividing the sum of any three cards by 10.
+
       Then press submit within 30 seconds, otherwise, it will be considered as giving up. <br>
-      
+
       Compare the piles with the host according to the rule: max against max, min against min. <br>
-      
+
       If you win both comparisons, you receive coins. If it's a tie, you keep your coins. If you lose, you lose your betting money.
       </p>
       <button class="popup-close">Close</button>
