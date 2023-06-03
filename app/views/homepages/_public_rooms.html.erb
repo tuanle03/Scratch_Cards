@@ -3,6 +3,7 @@
 
   <div class="card-body-room">
     <h4 class="card-title">Public Rooms</h4>
+
     <div class="d-flex mt-2 text-center">
       <h5 class="card-subtitle mb-2 text-body-secondary p-2 w-100"> Room Name </h5>
       <h5 class="card-subtitle mb-2 text-body-secondary p-2 w-100"> Room Code </h5>
@@ -10,7 +11,7 @@
     </div>
 
     <% @public_rooms.each do |room| %>
-
+    
       <div class="d-flex mt-2 text-center">
         <h6 class="card-subtitle mb-2 text-body-secondary p-2 w-100"> <%= room.name %> </h6>
         <h6 class="card-subtitle mb-2 text-body-secondary p-2 w-100"> <%= room.code %> </h6>
