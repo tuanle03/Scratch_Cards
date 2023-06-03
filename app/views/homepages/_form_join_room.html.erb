@@ -5,22 +5,27 @@
     <nav class="col-lg-8">
       <ul class="list-unstyled d-flex flex-column gap-2">
         <li>
+
           <div>
             <strong> <%= label_tag :code, "Room Code", class: "d-block" %> </strong>
             <%= text_field_tag :code %>
           </div>
+
         </li>
+
         <li>
           <div>
             <strong> <%= label_tag :code, "Password", class: "d-block" %> </strong>
             <%= password_field_tag :password %>
           </div>
         </li>
+
         <li>
           <div>
             <%= submit_tag "Join Room", class: "btn-outline-dark" %>
           </div>
         </li>
+        
       </ul>
     </nav>
   </div>

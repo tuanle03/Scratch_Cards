@@ -1,5 +1,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Lily+Script+One&family=Righteous&display=swap" rel="stylesheet">
 <div class="card mt-3">
+
   <div class="card-body-room">
     <h4 class="card-title">Public Rooms</h4>
     <div class="d-flex mt-2 text-center">
@@ -7,13 +8,16 @@
       <h5 class="card-subtitle mb-2 text-body-secondary p-2 w-100"> Room Code </h5>
       <h5 class="card-subtitle mb-2 text-body-secondary p-2 w-100"> Max Players </h5>
     </div>
+
     <% @public_rooms.each do |room| %>
+
       <div class="d-flex mt-2 text-center">
         <h6 class="card-subtitle mb-2 text-body-secondary p-2 w-100"> <%= room.name %> </h6>
         <h6 class="card-subtitle mb-2 text-body-secondary p-2 w-100"> <%= room.code %> </h6>
         <h6 class="card-subtitle mb-2 text-body-secondary p-2 w-100"> <%= room.current_players_count %> / <%= room.players.to_i %>  </h6>
         <%= button_to "Join", join_room_path(room.id), method: :post, class: "btn btn-primary p-2 flex-shrink-1" %>
       </div>
+      
     <%end%>
   </div>
 </div>
