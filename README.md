@@ -24,8 +24,8 @@ bundle install
 3. Next, you will need to set up the database by running the following commands:
 
 ```
-rails db:create
 rails db:migrate
+rails db:seed
 ```
 
 4. Finally, start the web server by running:
