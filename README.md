@@ -1,4 +1,4 @@
-# Scratch Card Game
+# Scratch Card Game https://game-card.herokuapp.com
 This project is focused on building a networked game for scratch cards, where players can play a traditional button-counting game but with the added twist of using six cards instead of three. The game will be built using Ruby on Rails framework for web development.
 
 ## Requirements
@@ -24,8 +24,8 @@ bundle install
 3. Next, you will need to set up the database by running the following commands:
 
 ```
-rails db:create
 rails db:migrate
+rails db:seed
 ```
 
 4. Finally, start the web server by running:
