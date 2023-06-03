@@ -1,14 +1,13 @@
-
- .btn-outline-dark{
+.btn-outline-dark{
   font-family: 'Lily Script One', cursive;
   color: #7E1717;
  }
 
- .fs-3{
+.fs-3{
   color: #7E1717;
  }
 
- .p-3 {
+.p-3 {
   background-color: #7E1717;
 }
 
@@ -73,7 +72,7 @@
     font-family: 'Lily Script One', cursive;
   }
 
- .title {
+.title {
     font-size: 200px;
     text-align: center;
     font-weight: bold;
@@ -112,18 +111,18 @@
     animation: glowingButton 2s infinite;
   }
 
-  .w-100 {
+.w-100 {
     font-family: 'Lily Script One', cursive;
     color: #7E1717;
   }
 
-  .fade-in {
+.fade-in {
     animation: fadeInAnimation 1s ease-in;
     animation-fill-mode: forwards;
     opacity: 0;
   }
 
-  @keyframes fadeInAnimation {
+@keyframes fadeInAnimation {
     0% {
       opacity: 0;
     }
@@ -144,30 +143,32 @@
     }
   }
 
-  .form-control:focus {
+.form-control:focus {
     border-color: #eb1818;
     box-shadow: 0 0 5px rgba(235, 24, 24, 0.5);
   }
 
-  .form-control:hover {
+.form-control:hover {
     background-color: rgba(126, 23, 23, 0.1);
   }
 
-  .card {
+.card {
     position: relative;
     z-index: 0;
     overflow: hidden;
     border-radius: 50%;
   }
 
-  @font-face {
+@font-face {
     font-family: 'Lily Script One';
     src: url('Scratch_Cards/app/assets/stylesheets/LilyScriptOne-Regular.ttf') format('truetype');
   }
-  body {
+body {
     font-family: 'Lily Script One', cursive;
   }
-  .btn-outline-dark {
+
+
+.btn-outline-dark {
     font-family: 'Lily Script One', cursive;
     background-color: #7E1717;
     color: #ffffff;
@@ -178,15 +179,17 @@
     margin-left: -1px;
     animation: glowingButton 2s infinite;
   }
-  .nav-link {
+
+
+.nav-link {
     color: #fff;
   }
 
-  .nav-link.fw-bold {
+.nav-link.fw-bold {
     font-weight: bold;
   }
 
-  .popup {
+.popup {
     color: #7E1717;
     font-family: 'Lily Script One', cursive;
     display: none;
@@ -199,7 +202,7 @@
     z-index: 9999;
   }
 
-  .popup-content {
+.popup-content {
     color: #7E1717;
     font-family: 'Lily Script One', cursive;
     background-color: #fff;
@@ -209,7 +212,19 @@
     border-radius: 5px;
   }
 
-  .popup-close {
+
+.card-mt-3{
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background-color: white;
+    flex-wrap: wrap;
+    font-family: 'Lily Script One', cursive;
+  }
+  
+
+
+.popup-close {
     font-family: 'Lily Script One', cursive;
     background-color: #7E1717;
     color: #ffffff;
@@ -220,15 +235,6 @@
     margin-left: -1px;
     animation: glowingButton 2s infinite;
   }
-
-.card-mt-3{
-  margin-top: 10px;
-  padding: 10px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  background-color: white;
-  flex-wrap: wrap;
-  font-family: 'Lily Script One', cursive;
-}
 
 .rounded-circle-wrapper {
   display: flex;
@@ -243,15 +249,17 @@
 .btn btn-outline-light me-2{
   margin-bottom: 0;
 }
-.dropdown-toggle {
-  display: flex;
-  align-items: center;
-}
+
 
 .text-end {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+}
+
+.dropdown-toggle {
+  display: flex;
+  align-items: center;
 }
 
 .btn-outline-light {
@@ -282,7 +290,7 @@ ul#current-cards {
   margin: 0;
   box-sizing: border-box;
 
-  li {
+li {
     float: left;
     margin-right: 10px;
     cursor: pointer;

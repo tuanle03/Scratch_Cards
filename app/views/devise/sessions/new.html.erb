@@ -3,13 +3,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Lily+Script+One&family=Righteous&display=swap" rel="stylesheet">
 
 <h2 class="title">Scratch Cards</h2>
+
 <style>
   body{
     background-image: url(<%= image_path("background.jpg")%>);
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
-  }
+     }
 </style>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
@@ -44,8 +45,10 @@
                 </label>
               </div>
             <% end %>
+
             <%= f.submit "Sign in", class: "btn-primary" %>
             <%= render "devise/shared/links"%>
+            
           </div>
         </div>
       </div>
