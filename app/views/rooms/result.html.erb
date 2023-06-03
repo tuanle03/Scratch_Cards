@@ -21,6 +21,7 @@
           <%= button_to 'New game', ready_room_path(@room), method: :put, class: "btn btn-info", disabled: true, id: 'ready-button' %>
         <% end %>
       </div>
+
       <div class="text-end mt-2">
         <%= button_to "Leave Room", leave_room_path(@room), method: :delete, class: "btn btn-warning" %>
       </div>
@@ -45,6 +46,7 @@
       </div>
     </div>
   </div>
+  
   <h4 class='mt-4 card-title'>Players</h4>
   <div class='row mt-2'>
     <div class='col'>
