@@ -5,8 +5,8 @@ This project is focused on building a networked game for scratch cards, where pl
 In order to run this project, you will need:
 
 - Ruby on Rails (version 7.0 or higher)
-- A web server such as Apache or Nginx
-- A database management system such as MySQL or SQLite3
+- A web server: Heroku and Pusher for Websocket
+- A database management enviroment system: PostgreSQL on Production and SQLite3 on Development
 
 ## Getting Started
 1. To get started with this project, you can clone the repository to your local machine using the following command:
