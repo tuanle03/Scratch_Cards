@@ -143,6 +143,7 @@ GEM
       mini_portile2 (~> 2.8.0)
       racc (~> 1.4)
     orm_adapter (0.5.0)
+    pg (1.5.3)
     popper_js (2.11.7)
     public_suffix (5.0.1)
     puma (5.6.5)
@@ -253,6 +254,7 @@ DEPENDENCIES
   devise (= 4.9.2)
   importmap-rails
   jbuilder
+  pg
   puma (~> 5.0)
   pusher
   rails (~> 7.0.4, >= 7.0.4.3)
